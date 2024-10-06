@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emploi du Temps Interactif</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .schedule-container {
+            margin: 20px auto;
+            padding: 10px;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            position: relative;
+        }
+
+        th {
+            background-color: #f8f8f8;
+        }
+
+        .course {
+            background-color: #87ceeb;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+
+        .course:hover {
+            background-color: #4682b4;
+        }
+
+        .empty {
+            background-color: #f4f4f4;
+        }
+
+        .course-info {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .course-info h2 {
+            margin-top: 0;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .course-info p {
+            margin: 10px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .close-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        .course.open .course-info {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mon Emploi du Temps Interactif</h1>
+    </header>
+
+    <div class="schedule-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ligne 1 de l'emploi du temps -->
+                <tr>
+                    <td>08:10 - 09:45</td>
+                    <td class="course">Physique
+                        <div class="course-info">
+                            <h2>Physique</h2>
+                            <p>Professeur: M. Ponard Julien</p>
+                            <p>Salle: A119</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Mathématiques
+                        <div class="course-info">
+                            <h2>Mathématiques</h2>
+                            <p>Professeur: Mme. Dupont</p>
+                            <p>Salle: B203</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Anglais
+                        <div class="course-info">
+                            <h2>Anglais</h2>
+                            <p>Professeur: Mme. Baneira Frias Sandra</p>
+                            <p>Salle: C118</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Histoire
+                        <div class="course-info">
+                            <h2>Histoire</h2>
+                            <p>Professeur: M. Balmer Mascotto Tristan</p>
+                            <p>Salle: C213</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 2 de l'emploi du temps -->
+                <tr>
+                    <td>09:50 - 11:25</td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Sport
+                        <div class="course-info">
+                            <h2>Sport</h2>
+                            <p>Professeur: M. Luisier Philipe</p>
+                            <p>Salle: Gymnase</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Chimie
+                        <div class="course-info">
+                            <h2>Chimie</h2>
+                            <p>Professeur: M. Dubois</p>
+                            <p>Salle: B312</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Géographie
+                        <div class="course-info">
+                            <h2>Géographie</h2>
+                            <p>Professeur: Mme. Garnier</p>
+                            <p>Salle: A118</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 3 de l'emploi du temps -->
+                <tr>
+                    <td>11:40 - 12:25</td>
+                    <td class="course">Biologie
+                        <div class="course-info">
+                            <h2>Biologie</h2>
+                            <p>Professeur: Mme. Leblanc</p>
+                            <p>Salle: B109</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Français
+                        <div class="course-info">
+                            <h2>Français</h2>
+                            <p>Professeur: M. Martin</p>
+                            <p>Salle: A217</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Musique
+                        <div class="course-info">
+                            <h2>Musique</h2>
+                            <p>Professeur: Mme. Morel</p>
+                            <p>Salle: D101</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                </tr>
+
+                <!-- Ligne 4 de l'emploi du temps -->
+                <tr>
+                    <td>12:30 - 13:15</td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Informatique
+                        <div class="course-info">
+                            <h2>Informatique</h2>
+                            <p>Professeur: M. Leroy</p>
+                            <p>Salle: C220</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Philosophie
+                        <div class="course-info">
+                            <h2>Philosophie</h2>
+                            <p>Professeur: M. Renard</p>
+                            <p>Salle: C315</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Espagnol
+                        <div class="course-info">
+                            <h2>Espagnol</h2>
+                            <p>Professeur: Mme. Perez</p>
+                            <p>Salle: B218</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 5 de l'emploi du temps -->
+                <tr>
+                    <td>13:20 - 14:05</td>
+                    <td class="course">Arts Plastiques
+                        <div class="course-info">
+                            <h2>Arts Plastiques</h2>
+                            <p>Professeur: Mme. Martin</p>
+                            <p>Salle: A101</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Éducation Civique
+                        <div class="course-info">
+                            <h2>Éducation Civique</h2>
+                            <p>Professeur: M. Joly</p>
+                            <p>Salle: C201</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Mathématiques
+                        <div class="course-info">
+                            <h2>Mathématiques</h2>
+                            <p>Professeur: Mme. Dupont</p>
+                            <p>Salle: B203</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                </tr>
+
+                <!-- Ligne 6 de l'emploi du temps -->
+                <tr>
+                    <td>14:10 - 14:55</td>
+                    <td class="course">Physique
+                        <div class="course-info">
+                            <h2>Physique</h2>
+                            <p>Professeur: M. Ponard Julien</p>
+                            <p>Salle: A119</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Chimie
+                        <div class="course-info">
+                            <h2>Chimie</h2>
+                            <p>Professeur: M. Dubois</p>
+                            <p>Salle: B312</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Informatique
+                        <div class="course-info">
+                            <h2>Informatique</h2>
+                            <p>Professeur: M. Leroy</p>
+                            <p>Salle: C220</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                </tr>
+
+                <!-- Ligne 7 de l'emploi du temps -->
+                <tr>
+                    <td>15:00 - 15:45</td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Biologie
+                        <div class="course-info">
+                            <h2>Biologie</h2>
+                            <p>Professeur: Mme. Leblanc</p>
+                            <p>Salle: B109</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Français
+                        <div class="course-info">
+                            <h2>Français</h2>
+                            <p>Professeur: M. Martin</p>
+                            <p>Salle: A217</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Musique
+                        <div class="course-info">
+                            <h2>Musique</h2>
+                            <p>Professeur: Mme. Morel</p>
+                            <p>Salle: D101</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 8 de l'emploi du temps -->
+                <tr>
+                    <td>15:50 - 16:35</td>
+                    <td class="course">Sport
+                        <div class="course-info">
+                            <h2>Sport</h2>
+                            <p>Professeur: M. Luisier Philipe</p>
+                            <p>Salle: Gymnase</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Anglais
+                        <div class="course-info">
+                            <h2>Anglais</h2>
+                            <p>Professeur: Mme. Baneira Frias Sandra</p>
+                            <p>Salle: C118</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Histoire
+                        <div class="course-info">
+                            <h2>Histoire</h2>
+                            <p>Professeur: M. Balmer Mascotto Tristan</p>
+                            <p>Salle: C213</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 9 de l'emploi du temps -->
+                <tr>
+                    <td>16:40 - 17:25</td>
+                    <td class="course">Économie
+                        <div class="course-info">
+                            <h2>Économie</h2>
+                            <p>Professeur: Mme. Thomas</p>
+                            <p>Salle: B407</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Sociologie
+                        <div class="course-info">
+                            <h2>Sociologie</h2>
+                            <p>Professeur: M. Lacroix</p>
+                            <p>Salle: A202</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Philosophie
+                        <div class="course-info">
+                            <h2>Philosophie</h2>
+                            <p>Professeur: M. Renard</p>
+                            <p>Salle: C315</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Ligne 10 de l'emploi du temps -->
+                <tr>
+                    <td>17:30 - 18:15</td>
+                    <td class="empty">Libre</td>
+                    <td class="course">Géographie
+                        <div class="course-info">
+                            <h2>Géographie</h2>
+                            <p>Professeur: Mme. Garnier</p>
+                            <p>Salle: A118</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Arts Plastiques
+                        <div class="course-info">
+                            <h2>Arts Plastiques</h2>
+                            <p>Professeur: Mme. Martin</p>
+                            <p>Salle: A101</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="course">Économie
+                        <div class="course-info">
+                            <h2>Économie</h2>
+                            <p>Professeur: Mme. Thomas</p>
+                            <p>Salle: B407</p>
+                            <button class="close-btn">Fermer</button>
+                        </div>
+                    </td>
+                    <td class="empty">Libre</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Sélectionner tous les éléments de cours
+        const courses = document.querySelectorAll('.course');
+
+        // Ajouter un événement de clic à chaque cours
+        courses.forEach(course => {
+            course.addEventListener('click', () => {
+                course.classList.toggle('open');
+            });
+
+            const closeBtn = course.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    course.classList.remove('open');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
